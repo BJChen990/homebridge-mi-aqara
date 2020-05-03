@@ -5,3 +5,12 @@ node_modules/
 parser/TemperatureAndHumiditySensorParser.js
 parser/ButtonParser.js
 parser/DeviceParser.js
+parser/GatewayParser.js
+parser/types.js
+
+lib/AccessoryUtil.js
+lib/LogUtil.js
+
+miio/**/*.js
+utils/**/*.js
+controllers/**/*.js

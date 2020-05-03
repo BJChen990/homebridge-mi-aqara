@@ -25,9 +25,12 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@types/color-convert": "^1.9.0",
     "body-parser": "1.18.3",
+    "color-convert": "^2.0.1",
     "express": "4.16.3",
     "express-session": "1.15.6",
+    "miio": "^0.15.6",
     "mqtt": "2.18.0"
   },
   "devDependencies": {

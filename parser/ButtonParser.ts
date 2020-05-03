@@ -6,10 +6,6 @@ import { HAP } from 'homebridge';
 class ButtonParser extends DeviceParser {
     static modelName = ['switch', 'sensor_switch']
 
-    constructor(platform: HAP) {
-        super(platform);
-    }
-    
     getAccessoriesParserInfo() {
         return {
           Button_StatelessProgrammableSwitch: ButtonStatelessProgrammableSwitchParser,

@@ -1,14 +1,15 @@
 import { HAP, Accessory } from "homebridge";
 import AccessoryParser from "./AccessoryParser";
+import { Platform } from './types';
 
 type AccessoryParserInfo = {
     [key: string]: new (platform: HAP, key: string) => AccessoryParser;
 }
 
-abstract class DeviceParser {
+export default abstract class DeviceParser {
   accessoriesParsers: { [key: string]: AccessoryParser } = {};
 
-  constructor(private readonly platform: HAP) {
+  constructor(private readonly platform: Platform) {
     this.initAccessoriesParser();
   }
 

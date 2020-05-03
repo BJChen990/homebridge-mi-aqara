@@ -450,6 +450,7 @@ MiAqaraPlatform.prototype.parseMessage = function(msg, rinfo) {
                 gateway = {
                     sid: gatewaySid,
                     passwd: that.ConfigUtil.getGatewayPasswordByGatewaySid(gatewaySid),
+                    miioToken: that.ConfigUtil.getGateways()[gatewaySid].miioToken,
                     ip: jsonObj['ip'], // rinfo.address,
                     port: jsonObj['port'] // rinfo.port,
                 }

@@ -11,10 +11,6 @@ import {
 class TemperatureAndHumiditySensorParser extends DeviceParser {
   static readonly modelName = ["sensor_ht"];
 
-  constructor(platform: HAP) {
-      super(platform);
-  }
- 
   getAccessoriesParserInfo() {
     return {
       TemperatureAndHumiditySensor_Accessory: TemperatureAndHumiditySensorAccessoryParser,

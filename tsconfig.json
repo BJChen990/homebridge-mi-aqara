@@ -63,6 +63,6 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["controllers/**/*.ts", "parser/**/*.ts", "lib/**/*.ts", "miio/**/*.ts"],
+  "include": ["controllers/**/*.ts", "parser/**/*.ts", "lib/**/*.ts", "utils/**/*.ts", "miio/**/*.ts"],
   "exclude": []
 }

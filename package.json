@@ -31,11 +31,10 @@
     "express": "4.16.3",
     "express-session": "1.15.6",
     "miio": "^0.15.6",
-    "mqtt": "2.18.0"
-  },
-  "devDependencies": {
+    "mqtt": "2.18.0",
     "typescript": "^3.8.3",
     "homebridge": "^1.0.4",
     "@types/node": "^13.13.4"
-  }
+  },
+  "devDependencies": {}
 }

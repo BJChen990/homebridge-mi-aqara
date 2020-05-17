@@ -146,7 +146,7 @@ class MiAqaraPlatform implements DynamicPlatformPlugin {
       token: token,
     });
     const plugins = await Promise.all(
-      data.map(deviceId =>
+      [...data, serialId].map(deviceId =>
         this.loadDevice(deviceId, serialId).then(deviceInfo =>
           this.createAccessory(deviceInfo)
         )

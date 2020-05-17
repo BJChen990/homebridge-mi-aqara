@@ -27,16 +27,16 @@
   },
   "dependencies": {
     "@types/color-convert": "^1.9.0",
+    "@types/node": "^13.13.4",
     "body-parser": "1.18.3",
     "color-convert": "^2.0.1",
     "express": "4.16.3",
-    "simple-miio": "BJChen990/simple-miio",
     "express-session": "1.15.6",
+    "homebridge": "^1.0.4",
     "miio": "^0.15.6",
     "mqtt": "2.18.0",
-    "typescript": "^3.8.3",
-    "homebridge": "^1.0.4",
-    "@types/node": "^13.13.4"
+    "simple-miio": "BJChen990/simple-miio",
+    "typescript": "^3.9.2"
   },
   "devDependencies": {}
 }

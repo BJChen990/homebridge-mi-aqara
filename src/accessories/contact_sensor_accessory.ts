@@ -1,16 +1,15 @@
 import { AccessoryPlugin, GatewayAccessory } from "./types";
 import {
-  Categories,
-  CharacteristicEventTypes,
-  CharacteristicGetCallback,
-  Characteristic,
-  Service,
-} from "homebridge";
-import {
   AqaraReportParsedMessage,
   AqaraDeviceHeartbeatParsedMessage,
   AqaraReadAckParsedMessage,
 } from "../aqara_service/types";
+import {
+  Service,
+  Categories,
+  CharacteristicGetCallback,
+  CharacteristicEventTypes,
+} from "homebridge";
 
 const Accessory: AccessoryPlugin = {
   name: "Contact Sensor",
@@ -83,6 +82,7 @@ class ContactSensor extends GatewayAccessory {
       this.status.status,
       this.status.voltage
     );
+    const { Characteristic } = this.homebridge.hap;
     this.contactSensor?.updateCharacteristic(
       Characteristic.ContactSensorState,
       this.status.status === "open"
@@ -100,6 +100,8 @@ class ContactSensor extends GatewayAccessory {
   private readonly getContactSensorState = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
+
     callback(
       null,
       this.status.status === "open"
@@ -111,6 +113,7 @@ class ContactSensor extends GatewayAccessory {
   private readonly getStatusLowBattery = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
     callback(
       null,
       this.status.voltage < LOW_BATTERY_VOLTAGE

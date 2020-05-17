@@ -128,6 +128,8 @@ class Gateway extends GatewayAccessory {
       this.status.rgb[2]
     );
     const hslValue = rgb.hsl(this.status.rgb);
+    const { Characteristic } = this.homebridge.hap;
+
     this.lightSensor?.updateCharacteristic(
       Characteristic.CurrentAmbientLightLevel,
       this.status.illumination
@@ -164,6 +166,8 @@ class Gateway extends GatewayAccessory {
   private readonly getSecuritySystemCurrentState = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
+
     // TODO(Benji): Add alarm triggered event
     callback(
       null,
@@ -176,6 +180,8 @@ class Gateway extends GatewayAccessory {
   private readonly getSecuritySystemTargetState = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
+
     callback(
       null,
       this.status.securityState === "on"
@@ -270,6 +276,8 @@ class Gateway extends GatewayAccessory {
     callback: CharacteristicSetCallback
   ) => {
     try {
+      const { Characteristic } = this.homebridge.hap;
+
       let newState: SecurityState;
       switch (value) {
         case Characteristic.SecuritySystemTargetState.AWAY_ARM:

@@ -83,6 +83,8 @@ class MotionSensor extends GatewayAccessory {
       this.status.motionDetected,
       this.status.voltage
     );
+    const { Characteristic } = this.homebridge.hap;
+
     this.motionSensor?.updateCharacteristic(
       Characteristic.MotionDetected,
       this.status.motionDetected
@@ -104,6 +106,8 @@ class MotionSensor extends GatewayAccessory {
   private readonly getStatusLowBattery = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
+
     callback(
       null,
       this.status.voltage < LOW_BATTERY_VOLTAGE

@@ -67,6 +67,7 @@ class ProgrammableSwitch extends GatewayAccessory {
 
   private updateStatus = (aqaraStatus: SwitchData) => {
     const { status, voltage } = aqaraStatus;
+    const { Characteristic } = this.homebridge.hap;
     switch (status) {
       case "click":
         this.programmableSwitch?.updateCharacteristic(
@@ -106,6 +107,7 @@ class ProgrammableSwitch extends GatewayAccessory {
   private readonly getStatusLowBattery = (
     callback: CharacteristicGetCallback
   ) => {
+    const { Characteristic } = this.homebridge.hap;
     callback(
       null,
       this.status.voltage < LOW_BATTERY_VOLTAGE

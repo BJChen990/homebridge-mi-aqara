@@ -84,6 +84,8 @@ class Outlet extends GatewayAccessory {
       this.status.on,
       this.status.inUse
     );
+    const { Characteristic } = this.homebridge.hap;
+
     this.outlet?.updateCharacteristic(Characteristic.On, this.status.on);
     this.outlet?.updateCharacteristic(
       Characteristic.OutletInUse,
@@ -110,6 +112,8 @@ class Outlet extends GatewayAccessory {
   };
 
   private readonly getOutletInUse = (callback: CharacteristicGetCallback) => {
+    const { Characteristic } = this.homebridge.hap;
+
     callback(
       null,
       this.status.inUse

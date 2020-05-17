@@ -2,13 +2,9 @@ import { createCipheriv } from "crypto";
 import { EventEmitter } from "events";
 import { AqaraNetwork } from "./aqara_network";
 import {
-  AqaraRawResponseMessage,
-  AqaraGetIdListAckRawMessage,
   AqaraGetIdListAckParsedMessage,
-  AqaraReadAckRawMessage,
   AqaraReadAckParsedMessage,
   AqaraWriteAckParsedMessage,
-  AqaraWriteAckRawMessage,
   AqaraWriteMessage,
   AqaraParsedResponseMessage,
 } from "./types";
@@ -115,7 +111,7 @@ export class AqaraNetworkClient extends EventEmitter {
       };
       setTimeout(() => {
         this.off("read_ack", handler);
-        reject(new Error("timeout when getting ID list."));
+        reject(new Error("timeout when read device " + req.serialId + "."));
       }, this.timeout);
       this.on("read_ack", handler);
       this.client.send({ cmd: "read", sid: req.serialId }, port, address);
@@ -138,7 +134,7 @@ export class AqaraNetworkClient extends EventEmitter {
         };
         setTimeout(() => {
           this.off("write_ack", handler);
-          reject(new Error("timeout when getting ID list."));
+          reject(new Error("timeout when write device " + req.subId + "."));
         }, this.timeout);
         this.on("write_ack", handler);
 

@@ -64,7 +64,7 @@ class MotionSensor extends GatewayAccessory {
       | AqaraReadAckParsedMessage<HumidityTemperatureData>
   ) => {
     const { data, sid } = message;
-    if (sid !== this.config.serialId) {
+    if (sid !== this.getConfig().serialId) {
       return;
     }
     this.updateStatus(data);

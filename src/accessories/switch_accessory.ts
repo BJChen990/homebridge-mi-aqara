@@ -59,7 +59,7 @@ class ProgrammableSwitch extends GatewayAccessory {
       | AqaraReadAckParsedMessage<SwitchData>
   ) => {
     const { data, sid } = message;
-    if (sid !== this.config.serialId) {
+    if (sid !== this.getConfig().serialId) {
       return;
     }
     this.updateStatus(typeof data === "string" ? JSON.parse(data) : data);

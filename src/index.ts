@@ -92,11 +92,6 @@ class MiAqaraPlatform implements DynamicPlatformPlugin {
     this.platformConfig = config as GatewayConfig;
     this.aqaraClient = new AqaraNetworkClient(protocolClient);
     this.homebridge.on("didFinishLaunching", () => {
-      this.homebridge.unregisterPlatformAccessories(
-        "homebridge-mi-aqara",
-        "MiAqaraPlatform",
-        this.cachedAccessories
-      );
       this.discoverAccessoryGraph();
     });
   }
@@ -108,10 +103,11 @@ class MiAqaraPlatform implements DynamicPlatformPlugin {
         if (message.model !== "gateway") {
           return;
         }
+        const { port, address } = this.gatewayTree.getGateway(message.sid)!;
         this.gatewayTree.upsertGateway({
           serialId: message.sid,
-          address: remoteInfo.address,
-          port: remoteInfo.port,
+          address,
+          port,
           token: message.token,
         });
       }
@@ -167,16 +163,23 @@ class MiAqaraPlatform implements DynamicPlatformPlugin {
     );
     const gatewayConfig = this.platformConfig.gateways[deviceInfo.gatewayId];
     const module: PluginModule = await import(path);
-    const accessory = new module.default(
-      this.logger,
-      {
+    const getConfig = () => {
+      const gateway = Preconditions.checkExists(
+        this.gatewayTree.getGateway(deviceInfo.gatewayId)
+      );
+      const gatewayConfig = this.platformConfig.gateways[deviceInfo.gatewayId];
+      return {
         gateway: {
           ...gateway,
           ...gatewayConfig,
         },
         model: deviceInfo.model,
         serialId: deviceInfo.serialId,
-      },
+      };
+    };
+    const accessory = new module.default(
+      this.logger,
+      getConfig,
       this.homebridge,
       this.aqaraClient,
       deviceInfo.model === "gateway"

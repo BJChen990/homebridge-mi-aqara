@@ -45,14 +45,14 @@ export interface HeartbeatMessage<T> {
 export class GatewayAccessory {
   constructor(
     protected readonly logger: Logger,
-    protected readonly config: PluginConfig,
+    protected readonly getConfig: () => PluginConfig,
     protected readonly homebridge: API,
     protected readonly client: AqaraNetworkClient,
     protected readonly miioClient?: MiIOClient
   ) {}
 
   protected read<ResponseData>() {
-    const { gateway, serialId } = this.config;
+    const { gateway, serialId } = this.getConfig();
     return this.client.read<ResponseData>(
       { serialId: serialId },
       gateway.port,
@@ -63,13 +63,13 @@ export class GatewayAccessory {
   protected write<Request, ResponseData>(
     data: Request
   ): Promise<AqaraWriteAckParsedMessage<ResponseData>> {
+    const { gateway, serialId } = this.getConfig();
     const {
       aqaraProtocolPassword: password,
       token,
       port,
       address: ip,
-      serialId: sid,
-    } = this.config.gateway;
+    } = gateway;
     if (!token || !password) {
       throw new Error("either password of token is not defined");
     }
@@ -77,7 +77,7 @@ export class GatewayAccessory {
       {
         password,
         aqaraProtocolToken: token,
-        subId: this.config.serialId,
+        subId: serialId,
         data,
       },
       port,
@@ -92,7 +92,7 @@ export class GatewayAccessory {
   protected createAccessory(plugin: AccessoryPlugin) {
     const { name, category, information } = plugin;
     const { hap, platformAccessory } = this.homebridge;
-    const uuid = hap.uuid.generate(this.config.serialId);
+    const uuid = hap.uuid.generate(this.getConfig().serialId);
     const accessory = new platformAccessory(name, uuid, category);
     const {
       Service: { AccessoryInformation },

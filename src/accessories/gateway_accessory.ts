@@ -81,7 +81,7 @@ class Gateway extends GatewayAccessory {
     message: ReportMessage<GatewayData> | HeartbeatMessage<GatewayData>
   ) => {
     const { cmd, data, sid } = message;
-    if (sid !== this.config.serialId) {
+    if (sid !== this.getConfig().serialId) {
       return;
     }
     this.updateStatus(data);

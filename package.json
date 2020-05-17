@@ -3,6 +3,7 @@
   "version": "0.8.0",
   "description": "XiaoMi Aqara plugins for HomeBridge(https://github.com/nfarina/homebridge).",
   "license": "GPL",
+  "main": "dist/index.js",
   "keywords": [
     "homebridge-plugin"
   ],
@@ -29,6 +30,7 @@
     "body-parser": "1.18.3",
     "color-convert": "^2.0.1",
     "express": "4.16.3",
+    "simple-miio": "BJChen990/simple-miio",
     "express-session": "1.15.6",
     "miio": "^0.15.6",
     "mqtt": "2.18.0",
